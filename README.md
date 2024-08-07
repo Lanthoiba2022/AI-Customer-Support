@@ -1,9 +1,9 @@
-# AI-Customer-Support
+# AI Customer Support
 
+## Tech Stack
 
-Tech Stack: 
-Next.js (for server-side rendering and routing)
-TypeScript (for static type checking)
-MUI (for Material-UI components)
-Tailwind CSS (for utility-first styling)
-Gemini API (AI API integration)
+- **Next.js**: For server-side rendering and routing
+- **TypeScript**: For static type checking
+- **MUI**: For Material-UI components
+- **Tailwind CSS**: For utility-first styling
+- **Gemini API**: AI API integration
