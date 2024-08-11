@@ -1,4 +1,4 @@
-# AI Customer Support
+# AI Customer Support (Botix)
 
 ## Tech Stack
 
