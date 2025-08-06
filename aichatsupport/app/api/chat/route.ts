@@ -1,8 +1,6 @@
+// app/api/chat/route.ts
 import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const systemPrompt = `
 You are a dedicated customer support assistant EXCLUSIVELY for Headstarter, an AI interview practice platform. You must ONLY respond to questions related to Headstarter and its services.
@@ -95,12 +93,11 @@ function isHeadstarterRelated(prompt: string): boolean {
 export async function POST(req: Request) {
   try {
     // Initialize GoogleGenerativeAI with API Key
-    //@ts-ignore
-    const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+    const genAI = new GoogleGenerativeAI(process.env.API_KEY as string);
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-    
+
     const { prompt } = await req.json() as { prompt: string };
-    
+
     // Quick filtering for obviously off-topic queries
     if (!isHeadstarterRelated(prompt)) {
       return NextResponse.json({ 
@@ -115,7 +112,7 @@ export async function POST(req: Request) {
     const result = await model.generateContent(combinedPrompt);
     const response = await result.response;
     const text = await response.text();
-    
+
     // Additional check: if the response seems to be answering off-topic questions
     const lowerResponse = text.toLowerCase();
     const responseContainsCode = lowerResponse.includes('```') || 
